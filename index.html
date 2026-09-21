@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS-Only Custom Alert Example</title>
+    <style>
+        /*
+         * CSS-Only Custom Element: my-alert
+         * This component is styled purely with HTML and CSS, without any JavaScript.
+         * It leverages standard CSS features like attribute selectors and pseudo-elements.
+         */
+
+        /* Base styles for the custom element */
+        my-alert {
+            /* CSS variables for easy theming */
+            --alert-bg-color: #e0f7fa; /* Default background */
+            --alert-border-color: #00bcd4; /* Default border */
+            --alert-text-color: #263238; /* Default text */
+            --alert-icon-content: 'ℹ️'; /* Default icon */
+
+            display: block; /* Treat it as a block-level element */
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--alert-border-color);
+            background-color: var(--alert-bg-color);
+            color: var(--alert-text-color);
+            font-family: sans-serif;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s ease-in-out; /* Smooth transitions for hover */
+        }
+
+        /* Add an icon using a CSS pseudo-element */
+        my-alert::before {
+            content: var(--alert-icon-content); /* Icon driven by CSS variable */
+            font-size: 1.2em;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        /* Styles for different types of alerts using attribute selectors */
+        my-alert[type="success"] {
+            --alert-bg-color: #e8f5e9;
+            --alert-border-color: #4caf50;
+            --alert-icon-content: '✅';
+        }
+
+        my-alert[type="warning"] {
+            --alert-bg-color: #fffde7;
+            --alert-border-color: #ffeb3b;
+            --alert-icon-content: '⚠️';
+            color: #333; /* Darker text for light background */
+        }
+
+        my-alert[type="error"] {
+            --alert-bg-color: #ffebee;
+            --alert-border-color: #f44336;
+            --alert-icon-content: '❌';
+        }
+
+        /* Basic styling for content inside the alert */
+        my-alert strong {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        /* Demonstrate a simple interaction without JS */
+        my-alert:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Global body styling for better presentation */
+        body {
+            padding: 20px;
+            background-color: #f4f7f6;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        h1 {
+            font-family: sans-serif;
+            color: #333;
+        }
+
+        p {
+            font-family: sans-serif;
+            color: #555;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS-Only Custom Elements Example</h1>
+    <p>These &quot;custom elements&quot; are styled purely with HTML and CSS, without any JavaScript. They leverage standard CSS features like attribute selectors and pseudo-elements to create reusable UI components that behave like custom elements.</p>
+
+    <!-- Default alert -->
+    <my-alert>
+        <strong>Bilgi:</strong> Bu, JavaScript kullanılmadan oluşturulmuş varsayılan bir uyarıdır.
+    </my-alert>
+
+    <!-- Success alert, styled via the 'type="success"' attribute -->
+    <my-alert type="success">
+        <strong>Başarılı:</strong> İşleminiz başarıyla tamamlandı!
+    </my-alert>
+
+    <!-- Warning alert, styled via the 'type="warning"' attribute -->
+    <my-alert type="warning">
+        <strong>Uyarı:</strong> Dikkat! Bazı önemli bilgiler eksik olabilir.
+    </my-alert>
+
+    <!-- Error alert, styled via the 'type="error"' attribute -->
+    <my-alert type="error">
+        <strong>Hata:</strong> Bir sorun oluştu. Lütfen tekrar deneyin.
+    </my-alert>
+
+    <!-- Another default alert with different content -->
+    <my-alert>
+        <strong>Not:</strong> CSS değişkenleri ve öznitelik seçicilerle farklı görünümler elde edilebilir.
+    </my-alert>
+</body>
+</html>
